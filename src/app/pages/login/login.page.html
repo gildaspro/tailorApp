@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>LOGIN</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding>
+    <ion-item padding-top>
+        <div class="item-note" item-start>
+            <ion-icon name="at" class="icon" color='secondary'></ion-icon>
+        </div>
+      <ion-input type="text" [(ngModel)]="user.email" placeholder="email"></ion-input>
+    </ion-item>
+  
+    <ion-item padding-top>
+        <div class="item-note" item-start>
+            <ion-icon name="lock" class="icon" color='secondary'></ion-icon>
+        </div>
+           <ion-input type="password" [(ngModel)]="user.password" placeholder="password"></ion-input>
+    </ion-item>
+  
+    <ion-button  size="large" color="secondary" expand="full" class="padd" (click)="login()">Register</ion-button>
+    <div class="error"> {{ erromassage}} </div>
+
+  </ion-content>
+  

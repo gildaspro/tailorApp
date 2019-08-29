@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>REGISTER</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-item padding-top>
+      <div class="item-note" item-start>
+          <ion-icon name="at" class="icon" color='secondary'></ion-icon>
+      </div>
+    <ion-input type="text" [(ngModel)]="email" placeholder="email" require></ion-input>
+  </ion-item>
+
+  <ion-item padding-top>
+      <div class="item-note" item-start>
+          <ion-icon name="lock" class="icon" color='secondary'></ion-icon>
+      </div>
+         <ion-input type="password" [(ngModel)]="password" placeholder="password" require></ion-input>
+  </ion-item>
+
+  <ion-button  size="large" color="secondary" expand="full" class="padd" (click)="register()" >Register</ion-button>
+  <div class="error"> {{erromassage}} </div>
+</ion-content>

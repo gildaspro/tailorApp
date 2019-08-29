@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Edit Order</ion-title>
+    <ion-icon name="close" slot="end" style="margin-right: 5px; font-size: 1.5rem"></ion-icon>  
+    <ion-icon name="checkmark" slot="end" style="font-size: 1.5rem; margin-right: 5px;"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+   
+        <ion-toolbar color="light">
+         <ion-list-header>Order items[order.length]</ion-list-header>
+     <ion-button color="primary" slot="end" size="small"style="margin-right:10px;" [routerLink]="['tabs/open']" (click)=" addOrder() " >
+          <ion-icon name="add-circle-outline" ></ion-icon>  
+    </ion-button>
+      </ion-toolbar>
+    
+      
+      <ion-card>
+       <ion-card-header>
+          <span style="margin-right:10px;">Dress</span>
+          <ion-button color="danger" style="margin-right:5px;" (click)=" remove()">
+              <ion-icon name="trash"></ion-icon>
+             </ion-button>    
+          <ion-button color="primary"  (click) ="updateOrder()">
+             <ion-icon name="create"style="font-size = 10px; " ></ion-icon>
+             </ion-button>
+        </ion-card-header>
+        <ion-card-content>
+         
+            <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div>
+                            <ion-label class="label">Unit Price</ion-label>
+                            <ion-input placeholder="$65.00"  [(ngModel)]="orders.prixUnitaire"></ion-input>
+                        
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div>
+                            <ion-label class="label">Quantity</ion-label>
+                            <ion-input placeholder="1" [(ngModel)]="orders.Quantite"></ion-input>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div>
+                            <ion-label class="label">price</ion-label>
+                            <ion-input placeholder="$65.00" [(ngModel)]="orders.PrixTotal" ></ion-input>
+                        
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+                      <ion-label>Notes</ion-label>
+                      <ion-input placeholder="Note"></ion-input>
+                 
+            
+        </ion-card-content>
+       </ion-card>
+       <ion-toolbar color="light">
+         <ion-list-header>sub Total items[{{ orders.totalprice}}]</ion-list-header>
+   </ion-toolbar>
+    
+   <ion-item padding-top>
+      <div class="item-note" item-start>
+          <ion-icon name="person" class="icon" color='secondary'></ion-icon>
+      </div>
+      <ion-input type="text"  placeholder="Customer Ref"[(ngModel)]="orders.CustomerRef"></ion-input>
+  </ion-item>
+
+  <ion-item padding-top>
+      <div class="item-note" item-start>
+          <ion-icon name="cash" class="icon" color='secondary' ></ion-icon>
+      </div>
+             <ion-input   placeholder="Acount" [(ngModel)]="orders.Amount"></ion-input>
+  </ion-item>
+
+  <ion-item padding-top>
+      <div class="item-note" item-start>
+          <ion-icon name="cash" class="icon" color='secondary'></ion-icon>
+      </div>
+    <ion-input type="text"  placeholder="Discount" [(ngModel)]="orders.Discound"></ion-input>
+  </ion-item>
+
+  <ion-item padding-top>
+      <div class="item-note" item-start>
+          <ion-icon name="person" class="icon" color='secondary'></ion-icon>
+      </div>
+         <ion-input type="text" placeholder="Customer" [(ngModel)]="orders.customerID"></ion-input>
+  </ion-item>
+
+ 
+</ion-content>
+
+<ion-footer *ngIf="!clientId">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['tabs/open']" (click)=" addOrder() "  >
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+ </ion-fab>     
+</ion-footer>
+<ion-footer *ngIf="clientId">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['order/open']" (click)=" addOrder() "  >
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+ </ion-fab>     
+</ion-footer>

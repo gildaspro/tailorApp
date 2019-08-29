@@ -1,0 +1,7 @@
+{
+  "name": "finalAp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

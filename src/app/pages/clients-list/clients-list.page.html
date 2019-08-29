@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>clientsList</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content>
+   <ion-list>
+  
+     <ion-item-sliding *ngFor="let clients of clientList  ">
+        
+      <ion-item lines="inset" button [routerLink]="['/tabs/clients', clients.id]">
+       
+          <ion-avatar slot="start">
+            <img src="./thumbnail.svg">
+          </ion-avatar>
+        
+      <ion-label>
+          <h1 class="h1">{{clients.FullName}}</h1>
+        <h3 class="h3"> {{clients.email}}</h3>
+        <p class="p">{{clients.creatAt}}</p>
+       </ion-label>
+       <ion-note slot="end">          
+          <ion-icon name="arrow-dropright" ></ion-icon>
+       </ion-note>
+      </ion-item>
+      <ion-item-options side="end" (ionSwipe)="remove(clients)">
+        <ion-item-option (click)="remove(clients)" color="secondary">
+            DELETE
+            <ion-icon name="chsckmark" slot="end"></ion-icon>
+        </ion-item-option>
+       
+      </ion-item-options>
+
+     </ion-item-sliding>
+    </ion-list>
+    <ion-infinite-scroll threshold="10px" (ionInfinite)="loadData($event)"position="top">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  </ion-content>
+    
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/clients']" routerLinkActive="router-link-active" >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+   </ion-fab>
+ 
+
