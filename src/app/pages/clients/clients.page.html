@@ -2,7 +2,7 @@
  <ion-header >
       <ion-toolbar color="tertiary">
         <ion-buttons slot="start">
-          <ion-back-button defaultHref="/tabs/client-list"></ion-back-button>
+          <ion-back-button defaultHref="/tabs/clients-list"></ion-back-button>
           <ion-title>Customers</ion-title>
         </ion-buttons>
       </ion-toolbar>
@@ -29,28 +29,28 @@
               <ion-row class="body">        
                <ion-col size="4" >
                    <ion-item class="form-group">
-                       <ion-label class="label" class="namel" >Bust:</ion-label>
-                       <ion-input  [(ngModel)]="client.Bust" class="inputl" ></ion-input>
+                       <ion-label class="label" class="namel"  >Bust:</ion-label>
+                       <ion-input  [(ngModel)]="client.Bust" class="inputl"   ></ion-input>
                    </ion-item>
                 </ion-col>
                 <ion-col size="8">
                    <ion-item class="form-group">
-                       <ion-label class="label" class="namel" >Bust separation:</ion-label>
-                       <ion-input  [(ngModel)]="client.Bustseparation" class="inputl"></ion-input>
+                       <ion-label class="label" class="namel"  >Bust Separation:</ion-label>
+                       <ion-input  [(ngModel)]="client.Bustseparation" class="inputl"  ></ion-input>
                    </ion-item>
                  </ion-col>
                 </ion-row>
               
                 <ion-row>
-                  <ion-col size="5">
+                  <ion-col size="12">
                    <ion-item class="form-group">
-                       <ion-label class="label" class="namel">Point of bust:</ion-label>
-                       <ion-input  [(ngModel)]="client.poinOfBurst" class="inputl"  ></ion-input>
+                       <ion-label class="label" class="namel" >Point of bust:</ion-label>
+                       <ion-input  [(ngModel)]="client.poinOfBurst"   ></ion-input>
                    </ion-item>
                   </ion-col>
-                <ion-col size="7">
+                <ion-col size="12">
                    <ion-item class="form-group">
-                       <ion-label class="label" class="namel">Front neck to waist:</ion-label>
+                       <ion-label class="label" class="namel" >Front neck to waist:</ion-label>
                        <ion-input  [(ngModel)]="client.FrontNeckToWaist"  ></ion-input>
                    </ion-item>
                    
@@ -60,13 +60,13 @@
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label"class="namel">Upper arm:</ion-label>
-                       <ion-input  [(ngModel)]="client.upperArm" class="inputl" ></ion-input>
+                       <ion-input  [(ngModel)]="client.upperArm"  ></ion-input>
                    </ion-item>
                 </ion-grid>
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label"class="namel">thigh:</ion-label>
-                       <ion-input  [(ngModel)]="client.Thigh" class="inputl" ></ion-input>
+                       <ion-input  [(ngModel)]="client.Thigh"  ></ion-input>
                    </ion-item>
                    
                 </ion-grid>
@@ -75,13 +75,13 @@
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label" class="namel">Back width:</ion-label>
-                       <ion-input  [(ngModel)]="client.BackWiidth" class="inputl" ></ion-input>
+                       <ion-input  [(ngModel)]="client.BackWiidth"  ></ion-input>
                    </ion-item>
                 </ion-grid>
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label" class="namel"> Nick width:</ion-label>
-                       <ion-input [(ngModel)]="client.NeckWidth" class="inputl" ></ion-input>
+                       <ion-input [(ngModel)]="client.NeckWidth"  ></ion-input>
                    </ion-item>
                    
                 </ion-grid>
@@ -90,13 +90,13 @@
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label" class="namel">Pants lenh:</ion-label>
-                       <ion-input  [(ngModel)]="client.pantsLenght" class="inputl" ></ion-input>
+                       <ion-input  [(ngModel)]="client.pantsLenght"  ></ion-input>
                    </ion-item>
                 </ion-grid>
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label"class="namel">Shoulder:</ion-label>
-                       <ion-input  [(ngModel)]="client.Shoulder"class="inputl" ></ion-input>
+                       <ion-input  [(ngModel)]="client.Shoulder" ></ion-input>
                    </ion-item>
                    
                 </ion-grid>
@@ -105,13 +105,13 @@
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label" class="namel">Sleeve length:</ion-label>
-                       <ion-input    [(ngModel)]="client.sleeeLenght" class="inputl"></ion-input>
+                       <ion-input    [(ngModel)]="client.sleeeLenght" ></ion-input>
                    </ion-item>
                 </ion-grid>
                 <ion-grid>
                    <ion-item class="form-group">
                        <ion-label class="label" class="namel">Under burst:</ion-label>
-                       <ion-input   [(ngModel)]="client.UNderBurst" class="inputl"></ion-input>
+                       <ion-input   [(ngModel)]="client.UNderBurst" ></ion-input>
                    </ion-item>
                    
                 </ion-grid>
@@ -119,25 +119,21 @@
          </ion-list>
       
          
-         <ion-footer *ngIf="!clientId" padding-bottom>
-            <ion-fab vertical="top" horizontal="end" slot="fixed">
-                <ion-fab-button color="tertiary" vetical="end" horizontal="end"  (click)="addclient()"  >
-                  <ion-icon name="add"></ion-icon>
-                </ion-fab-button>
-             </ion-fab> 
-         </ion-footer>
+         <ion-item *ngIf="!clientId" padding-bottom >
+           <ion-button slot="end" size="large" expand="full" color="tertiary">Register</ion-button>
+         </ion-item>
  
-          <ion-footer  *ngIf="clientId " >
+          <ion-item  *ngIf="clientId " >
             <ion-fab vertical="top" horizontal="end" slot="fixed">
               <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/clients-list']" (click)="updateclient()"  >
                 <ion-icon name="create"></ion-icon>
               </ion-fab-button>
            </ion-fab>     
-          </ion-footer >
-         
+          </ion-item >
+     
+            
          
 </ion-content>
          
-            
-            
+           
     

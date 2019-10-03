@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+import { AngularFirestore  } from '@angular/fire/firestore';
+import { Client } from '../../services/authservice.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthserviceService } from '../../services/authservice.service';
 
 
 
@@ -11,19 +14,38 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-
-
+ 
+  constructor(
+              private storeService: AuthserviceService,
+              private route: ActivatedRoute,
+              private Toastmsg: ToastController,
+              private nav: NavController,
+              private router: Router,
+              public navCtrl: NavController,
+              public fAuth: AngularFireAuth) {}
+  
+  client: Client = {
+  name: '',
+  email: '',
+  Address:'',
+  phoneNumber: '',
+  password: '',
+  dateDeCreation: '',
+  };
   email: string;
   password: string;
+
   erromassage;
-  constructor(public navCtrl: NavController, public fAuth: AngularFireAuth) {
-  }
+
+  
+  clientId = this.client.id;
+
 
   async register() {
     try {
       const r = await this.fAuth.auth.createUserWithEmailAndPassword(
-        this.email,
-        this.password
+        this.client.email,
+        this.client.password
       );
       if (r) {
         alert('Successfully registered!');
@@ -34,8 +56,41 @@ export class RegisterPage implements OnInit {
      this.erromassage = err;
     }
   }
+ngOnInit() {
+   this.clientId = this.route.snapshot.paramMap.get('id');
+   if (this.clientId) {
+      this.storeService.getClient(this.clientId).subscribe(res => {
+        this.client = res;
+      });
+    }
+ }
 
-  ngOnInit() {
-  }
+addclient() {
+     this.register();
+     this.storeService.addClient(this.client).then(() => {
+     this.router.navigateByUrl('/tabs/clients-list');
+     this.showTaost('New Client Added');
+  }, err => {
+    this.showTaost('There was a problem adding your CLient :(');
+  });
+}
+
+updateclient() {
+  this.storeService.updateClient(this.client , this.clientId).then(() => {
+   this.showTaost('New Client update');
+  }, err => {
+    this.showTaost('There was a problem updating your CLient :(');
+  });
+}
+
+showTaost(msg){
+  this.Toastmsg.create({
+    message: msg,
+    duration: 2000
+  }).then(toast => toast.present());
 
 }
+}
+
+
+

@@ -1,9 +1,45 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>priceList</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+    <ion-list>
+<ion-item-sliding *ngFor="let price of clientList  ">
+        
+    <ion-item lines="inset" button [routerLink]="['/tabs/price', price.id]">
+     
+  <ion-label>
+   
+    <h2 class="name"> {{price.name}}  </h2>
+      
+ </ion-label>
 
+  <h6 color="tertiary">
+     {{price.price}}
+  </h6>
+
+</ion-item>
+<ion-item-options side="end" (ionSwipe)="remove(price)">
+  <ion-item-option (click)="remove(price)" color="secondary">
+      DELETE
+      <ion-icon name="chsckmark" slot="end"></ion-icon>
+  </ion-item-option>
+ 
+</ion-item-options>
+
+</ion-item-sliding>
+</ion-list>
+<ion-infinite-scroll threshold="10px" (ionInfinite)="loadData($event)"position="top">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/price']" routerLinkActive="router-link-active" >
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+ </ion-fab>

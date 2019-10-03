@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreServiceService } from 'src/app/services/store-service.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,10 +11,7 @@ export class TestappPage implements OnInit {
 
 
 
-  constructor(private storeService: StoreServiceService,
-              private router: Router,
-              
-            ) { }
+  constructor() { }
 
 
   ngOnInit() {

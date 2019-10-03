@@ -1,9 +1,39 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>progress</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-
-</ion-content>
+  <ion-list>
+  
+      <ion-item-sliding *ngFor="let orders of OrderList">
+       <ion-item lines="inset" button [routerLink]="['/tabs/edit-order', orders.id]">
+       <ion-label>
+            {{orders.customerID}}
+           <p>{{orders.Amount}}</p> 
+           <p>{{orders.Discound}}</p> 
+        </ion-label>
+       </ion-item>
+       <ion-item-options side="end" >
+          <ion-item-option color="secondary">
+            <ion-icon name="strash"></ion-icon>
+              DELETE
+              <ion-icon name="chsckmark" slot="end"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="secondary">
+              DELIVER
+                <ion-icon name="chsckmark" slot="end"></ion-icon>
+            </ion-item-option>
+         
+        </ion-item-options>
+  
+      </ion-item-sliding>
+     </ion-list>
+     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" >
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+  
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/edit-order']" routerLinkActive="router-link-active" >
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+       </ion-fab>
+  

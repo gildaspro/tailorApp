@@ -1,23 +1,53 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title>REGISTER</ion-title>
+  <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/welcome"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
-  <ion-item padding-top>
-      <div class="item-note" item-start>
-          <ion-icon name="at" class="icon" color='secondary'></ion-icon>
-      </div>
-    <ion-input type="text" [(ngModel)]="email" placeholder="email" require></ion-input>
-  </ion-item>
+  
+   <ion-content padding-top>
+      <ion-item>
+          <div class="item-note" slot="end">
+              <ion-icon name="person" class="icon" color='tertiary'></ion-icon>
+          </div>
+          <ion-label position="floating"class="label2">Name</ion-label>
+        <ion-input type="text" [(ngModel)]="client.name"></ion-input>
+      </ion-item>
+      <ion-item>
+          <div class="item-note" slot="end">
+              <ion-icon name="at" class="icon" color='tertiary'></ion-icon>
+          </div>
+          <ion-label position="floating"class="label2">Address</ion-label>
+        <ion-input type="text" [(ngModel)]="client.Address"></ion-input>
+      </ion-item>
+      <ion-item>
+          <div class="item-note" slot="end">
+              <ion-icon name="phone" class="icon" color='tertiary'></ion-icon>
+          </div>
+          <ion-label position="floating"class="label2">Phone Number</ion-label>
+        <ion-input type="text" [(ngModel)]="client.phoneNumber" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <div class="item-note" slot="end">
+              <ion-icon name="at" class="icon" color='tertiary'></ion-icon>
+          </div>
+          <ion-label position="floating"class="label2">Email</ion-label>
+      <ion-input type="text" [(ngModel)]="client.email" ></ion-input>
+      </ion-item>
+    
+      <ion-item>
+          <div class="item-note" slot="end">
+              <ion-icon name="lock" class="icon" color='tertiary'></ion-icon>
+          </div>
+          <ion-label position="floating"class="label2">password</ion-label>
+         <ion-input type="password" [(ngModel)]="client.password" ></ion-input>
+      </ion-item><p class="p">Already a member just  <a [routerLink]="['/login']" routerLinkActive="router-link-active"  >LOGIN</a> </p>
 
-  <ion-item padding-top>
-      <div class="item-note" item-start>
-          <ion-icon name="lock" class="icon" color='secondary'></ion-icon>
-      </div>
-         <ion-input type="password" [(ngModel)]="password" placeholder="password" require></ion-input>
-  </ion-item>
-
-  <ion-button  size="large" color="secondary" expand="full" class="padd" (click)="register()" >Register</ion-button>
-  <div class="error"> {{erromassage}} </div>
-</ion-content>
+    
+      <ion-button size="large" color="tertiary" expand="full"  class="padd" (click)="addclient()">Register</ion-button>
+      <div class="error"> {{ erromassage }} </div>
+  
+    </ion-content>
+    

@@ -45,26 +45,26 @@
   <ion-row>
     <!-- Change the displayed calendar mode -->
     <ion-col size="4">
-      <ion-button expand="block" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" (click)="changeMode('month')">Month</ion-button>
+      <ion-button expand="full" [color]="calendar.mode == 'month' ? 'tertiary' : 'success'" (click)="changeMode('month')">Month</ion-button>
     </ion-col>
     <ion-col size="4">
-      <ion-button expand="block" [color]="calendar.mode == 'week' ? 'primary' : 'secondary'" (click)="changeMode('week')">Week</ion-button>
+      <ion-button expand="full" [color]="calendar.mode == 'week' ? 'tertiary' : 'success'" (click)="changeMode('week')">Week</ion-button>
     </ion-col>
     <ion-col size="4">
-      <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">Day</ion-button>
+      <ion-button expand="full" [color]="calendar.mode == 'day' ? 'tertiary' : 'success'" (click)="changeMode('day')">Day</ion-button>
     </ion-col>
  
     <!-- Move back one screen of the slides -->
     <ion-col size="6" text-left>
       <ion-button fill="clear" (click)="back()">
-        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+        <ion-icon name="arrow-back" slot="icon-only" color="tertiary"></ion-icon>
       </ion-button>
     </ion-col>
  
     <!-- Move forward one screen of the slides -->
     <ion-col size="6" text-right>
       <ion-button fill="clear" (click)="next()">
-        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+        <ion-icon name="arrow-forward" slot="icon-only" color="tertiary"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>

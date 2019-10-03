@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { OrderPage } from './order.page';
-import { SuperTabsModule } from '@ionic-super-tabs/angular';
 
 
 const routes: Routes = [
@@ -22,9 +21,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    SuperTabsModule,
     IonicModule,
-  
     RouterModule.forChild(routes),
 
 

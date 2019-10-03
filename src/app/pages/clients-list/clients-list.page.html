@@ -9,20 +9,18 @@
   
      <ion-item-sliding *ngFor="let clients of clientList  ">
         
-      <ion-item lines="inset" button [routerLink]="['/tabs/clients', clients.id]">
+      <ion-item  button [routerLink]="['/tabs/clients', clients.id]">
        
           <ion-avatar slot="start">
             <img src="./thumbnail.svg">
           </ion-avatar>
         
       <ion-label>
-          <h1 class="h1">{{clients.FullName}}</h1>
-        <h3 class="h3"> {{clients.email}}</h3>
-        <p class="p">{{clients.creatAt}}</p>
+          <h2 class="h1" color="light-contrast">{{clients.FullName}}</h2>
+        <p class="h3"  color="dark-tint"> <ion-icon name="send" color="tertiary" slot="start" class="icon"></ion-icon> {{clients.email}}</p>
+        <p class="p"  color="dark-tint"><ion-icon name="hourglass" color="tertiary" slot="start" class="icon"></ion-icon> {{clients.creatAt}}</p>
        </ion-label>
-       <ion-note slot="end">          
-          <ion-icon name="arrow-dropright" ></ion-icon>
-       </ion-note>
+ 
       </ion-item>
       <ion-item-options side="end" (ionSwipe)="remove(clients)">
         <ion-item-option (click)="remove(clients)" color="secondary">
@@ -44,7 +42,7 @@
     
       <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/clients']" routerLinkActive="router-link-active" >
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="add-circle"></ion-icon>
       </ion-fab-button>
    </ion-fab>
  

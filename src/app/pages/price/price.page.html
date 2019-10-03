@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>price</ion-title>
+  <ion-toolbar color='tertiary' class="body">
+    <ion-title class="header"> PRICE/CATEGORY</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="body">
 
+    <ion-item padding-top>
+       
+        <ion-label position="floating"class="label2">NAME</ion-label>
+        <ion-input  [(ngModel)]="client.name" ></ion-input>
+    </ion-item>
+  
+    <ion-item padding-top>
+        
+        <ion-label position="floating"class="label2">PRICE</ion-label>
+        <ion-input  [(ngModel)]="client.price"  ></ion-input>
+    </ion-item>
+
+
+  
+
+
+<ion-footer *ngIf="!clientId"  padding >
+  
+    <ion-button  class="mb" size="large"  color="tertiary" expand="full"  (click)="addclient()"  ><ion-icon color="success" name="add-circle" slot="start"></ion-icon>Register</ion-button>
+
+</ion-footer>
+
+
+<ion-footer  *ngIf="clientId " class="icon" >
+    <ion-icon name="create" slot="start"></ion-icon>
+  <ion-button  size="large" color="tertiary" slot="bottom" expand="block" [routerLink]="['/tabs/price-list']"(click)="updateclient()"  >Register</ion-button>
+</ion-footer >
 </ion-content>
+

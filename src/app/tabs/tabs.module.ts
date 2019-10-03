@@ -8,7 +8,6 @@ import { IonicModule } from '@ionic/angular';
 import { TabsPage } from './tabs.page';
 import { CalendarPageModule } from '../pages/calendar/calendar.module';
 import { OpenPageModule } from '../pages/open/open.module';
-import { SuperTabsModule } from '@ionic-super-tabs/angular';
 
 const routes: Routes = [
   {
@@ -24,7 +23,7 @@ const routes: Routes = [
     CalendarPageModule,
     OpenPageModule,
     IonicModule,
-    SuperTabsModule,
+
 
     RouterModule.forChild(routes)
   ],

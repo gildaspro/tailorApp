@@ -23,7 +23,7 @@ constructor(private storeService: StoreServiceService,
                 if (this.clientList.length == 1000) {
                   event.target.disabled = true;
                 }
-              }, 10000);
+              }, 1000);
             }
 
 ngOnInit() {

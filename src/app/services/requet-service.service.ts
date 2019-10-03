@@ -5,7 +5,6 @@ import { map, take } from 'rxjs/operators';
 
 export interface Order {
    id?: string;
-
    Categorie: string;
    prixUnitaire: string;
    Quantite: string;

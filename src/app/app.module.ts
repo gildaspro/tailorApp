@@ -24,7 +24,8 @@ import { CalendarPageModule } from './pages/calendar/calendar.module';
 import { OpenPageModule } from './pages/open/open.module';
 import { DeliverPageModule } from './pages/deliver/deliver.module';
 import { ProgressPageModule } from './pages/progress/progress.module';
-import { SuperTabsModule } from 'ionic2-super-tabs';
+import { OrderPageModule } from './pages/order/order.module';
+
 
 
 
@@ -49,7 +50,7 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
     DeliverPageModule,
     ProgressPageModule,
     CalendarPageModule,
-    SuperTabsModule.forRoot()
+    OrderPageModule
 
 
 
