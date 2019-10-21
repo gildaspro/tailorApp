@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar color="tertiary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/welcome"></ion-back-button>
+          </ion-buttons>
+      <ion-title>LOGIN</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding>
+    <ion-item padding-top>
+        <div class="item-note" slot="end">
+            <ion-icon name="at" class="icon" color='tertiary'></ion-icon>
+        </div>
+        <ion-label position="floating"class="label2">Email</ion-label>
+        <ion-input type="text" [(ngModel)]="user.email" ></ion-input>
+    </ion-item>
+  
+    <ion-item >
+        <div class="item-note" slot="end">
+            <ion-icon name="lock" class="icon" color='tertiary'></ion-icon>
+        </div>
+        <ion-label position="floating"class="label2">password</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password" ></ion-input>
+    </ion-item><p class="p">Not yiet a member <a [routerLink]="['/login']" routerLinkActive="router-link-active"  >REGISTER</a> </p>
+   
+    <ion-button  size="large" color="tertiary" expand="full"  class="padd"(click)="login()">LONGIN</ion-button>
+  
+    <div class="error"> {{ erromassage}} </div>
+
+  </ion-content>
+  

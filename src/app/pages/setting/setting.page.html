@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home"></ion-back-button>
+        <ion-title>Price List</ion-title>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="primary" vetical="end" horizontal="end" [routerLink]="['/tabs/price']"routerLinkActive="router-link-active" >
+          <ion-icon name="create"></ion-icon>
+        </ion-fab-button>
+     </ion-fab>
+</ion-content>

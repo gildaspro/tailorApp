@@ -1,0 +1,156 @@
+<ion-header> 
+   <ion-toolbar color="tertiary" padding-top>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/order"></ion-back-button>
+      </ion-buttons>
+
+    
+       <ion-icon name="close" bottom slot="end" [routerLink]="['/tabs/order']" routerLinkActive="router-link-active"   style="margin-right: 5px; font-size: 1.5rem; cursor: pointer;"></ion-icon>  
+   
+ 
+     <ion-icon  name="checkmark"bottom slot="end"  (click)=" addOrder() " slot="end" style="font-size: 1.5rem; margin-right: 5px; cursor: pointer;"></ion-icon>
+     
+   <ion-title>Edit Order</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+   
+        <ion-toolbar color="light">
+         <ion-list-header>Order items[]</ion-list-header>
+     <ion-button color="tertiary" slot="end" expand="block" style="margin-right:10px; font-size:10px;" [routerLink]="['tabs/open']" (click)=" addOrder() " >
+          <ion-icon name="add-circle-outline" style="font-size: 20px;" ></ion-icon>  
+    </ion-button>
+      </ion-toolbar>
+    
+      
+      <ion-card>
+       <ion-card-header>
+          <span style="margin-right:10px;">Dress</span>
+          <ion-button color="danger"  style="margin-right:5px;" (click)=" remove()">
+              <ion-icon name="trash" style="font-size:15px;"></ion-icon>
+          </ion-button>    
+          <ion-button color="tertiary"   (click) ="updateOrder()"  >
+             <ion-icon name="create"  style="font-size:15px; "></ion-icon>
+          </ion-button>
+        </ion-card-header>
+        <ion-card-content>
+         
+            <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <div>
+                            <ion-label class="label">Unit Price</ion-label>
+                            <ion-input placeholder="$65.00"  [(ngModel)]="orders.prixUnitaire"></ion-input>
+                        
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div>
+                            <ion-label class="label">Quantity</ion-label>
+                            <ion-input placeholder="1" [(ngModel)]="orders.Quantite"></ion-input>
+                    </div>
+                  </ion-col>
+                  <ion-col>
+                    <div>
+                            <ion-label class="label">price</ion-label>
+                            <ion-input placeholder="$65.00" [(ngModel)]="orders.PrixTotal" ></ion-input>
+                        
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+                      <ion-label>Notes</ion-label>
+                      <ion-input placeholder="Note"></ion-input>
+                 
+            
+        </ion-card-content>
+       </ion-card>
+       <ion-toolbar color="light">
+         <ion-list-header>sub Total items[{{ orders.totalprice}}]</ion-list-header>
+   </ion-toolbar>
+    
+
+   <section class='container'>
+      <section class="leftSection" item-start>
+        <ion-icon name="person" class="icon bottom"  ></ion-icon>
+      </section>
+      
+      <ion-item class="rightSection">
+          <ion-label position="floating" class="label2">Customer Ref</ion-label>
+          <ion-input type="text" [(ngModel)]="orders.CustomerRef"></ion-input>
+      </ion-item>
+      
+   </section>  
+
+
+
+<section class='container'>
+  <section class="leftSection" item-start>
+    <ion-icon name="cash" class="icon bottom"  ></ion-icon>
+  </section>
+  
+  <ion-item class="rightSection">
+      <ion-label position="floating" class="label2">Acount</ion-label>
+            <ion-input    [(ngModel)]="orders.Amount"></ion-input>
+  </ion-item>
+</section>  
+  
+
+<section class='container'>
+    <section class="leftSection" item-start>
+      <ion-icon name="cash" class="icon bottom"  ></ion-icon>
+    </section>
+    
+    <ion-item class="rightSection">
+        <ion-label position="floating" class="label2">Discount</ion-label>
+              <ion-input    [(ngModel)]="orders.Discound"></ion-input>
+    </ion-item>
+  </section> 
+  <section class='container'>
+      <section class="leftSection" item-start>
+        <ion-icon name="person" class="icon bottom"  ></ion-icon>
+      </section>
+      
+      <ion-item class="rightSection">
+          <ion-label position="floating" class="label2">Customer </ion-label>
+          <ion-input type="text" [(ngModel)]="orders.customerID"></ion-input>
+      </ion-item>
+  </section> 
+  <section class='container'>
+      <section class="leftSection" item-start>
+        <ion-icon name="calendar" class="icon bottom"  ></ion-icon>
+      </section>
+      
+      <ion-item class="rightSection">
+          <ion-label position="floating" class="label2">Date De Creation</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="orders.DateDeCreation"></ion-datetime>
+        </ion-item>
+  </section> 
+  <section class='container'>
+      <section class="leftSection" item-start>
+        <ion-icon name="time" class="icon bottom"  ></ion-icon>
+      </section>
+      
+      <ion-item class="rightSection">
+          <ion-label position="floating" class="label2">Date De Livration </ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="orders.DateDeLivration"></ion-datetime>
+        </ion-item>
+  </section> 
+
+<ion-footer *ngIf="!clientId">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/order']" (click)=" addOrder() "  >
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+ </ion-fab>     
+</ion-footer>
+<ion-footer *ngIf="clientId">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/order']" (click)=" addOrder() "  >
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-fab-button>
+ </ion-fab>     
+</ion-footer>
+</ion-content>
