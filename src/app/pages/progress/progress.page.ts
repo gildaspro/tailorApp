@@ -32,10 +32,18 @@ export class ProgressPage implements OnInit {
      
     }
     
+    
+    
   loadItem( ) {
      this.orderService.getClients().subscribe(res => {
         this.OrderList = res;
       });
   }
 
+
+    l(){
+      this.orderService.getClients().subscribe(res => {
+        this.OrderList = res;
+      });
+    }
 }

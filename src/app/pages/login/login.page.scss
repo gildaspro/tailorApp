@@ -13,15 +13,13 @@
     background-color: rgb(52, 227, 250);
 }
 .padd{
-    margin-top: 1rem;
+    
+    margin: 0;
 }
 .p{
-    text-align: end;
-    margin: 0;
-    padding:5px;
+    text-align: center;
+    justify-content: center;
     color:black;
-    padding-right: 10px;
-    padding-top:5px;
 
 }
 
@@ -40,4 +38,10 @@ div{
 span{
     margin:0 !important;
     padding: 0 !important;
+}
+.label2{
+    font-size: 20px;
+    font-weight: 200;
+    letter-spacing: 2px;
+
 }

@@ -33,6 +33,8 @@ OrderList: Order[] ;
    this.loadItem();
    
   }
+  goprogress(){
+  }
   remove(orders: Order) {
     this.orderService .removeClient(orders.id);
  }

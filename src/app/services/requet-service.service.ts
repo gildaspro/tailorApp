@@ -19,12 +19,13 @@ export interface Order {
    DateDeSupressiont: any;
    totalprice: any;
    position: any;
+   
 }
 @Injectable({
   providedIn: 'root'
 })
 export class RequetServiceService {
-
+ open;
   private orderCollection: AngularFirestoreCollection<Order>;
   private orders: Observable<Order[]>;
   constructor(private db: AngularFirestore) {
@@ -72,6 +73,13 @@ this.move(order, 'progress');
 Delivre(order) {
   this.move(order, 'deliver');
 }
+getArticleByMarque() {
+  return this.db.collection('Orders', ref =>
+    ref.where('status', '==', 'open')
+  ).snapshotChanges();
+}
+
+
 move( order: Order , path: string) {
   this.orderCollection.doc(order.id).delete();
   const id = order.id;

@@ -56,7 +56,7 @@ ngOnInit() {
 
 addclient() {
   this.storeService.addClient(this.client).then(() => {
-   this.router.navigateByUrl('/tabs/clients-list');git 
+   this.router.navigateByUrl('/tabs/clients-list');
    this.showTaost('New Client Added');
   }, err => {
     this.showTaost('There was a problem adding your CLient :(');

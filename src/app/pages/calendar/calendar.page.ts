@@ -2,12 +2,14 @@ import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.page.html',
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage implements OnInit {
+  collapseCard;
   event = {
     title: '',
     desc: '',
@@ -68,14 +70,12 @@ export class CalendarPage implements OnInit {
   }
    // Change current month/week/day
  next() {
-  const swiper = document.querySelector('.swiper-container').swiper;
-  swiper.slideNext();
-}
+  var swiper = document.querySelector('.swiper-container')['swiper'];
+  swiper.slideNext();}
 
 back() {
-  const swiper = document.querySelector('.swiper-container').swiper;
-  swiper.slidePrev();
-}
+  var swiper = document.querySelector('.swiper-container')['swiper'];
+  swiper.slidePrev();}
 
 // Change between month/week/day
 changeMode(mode) {

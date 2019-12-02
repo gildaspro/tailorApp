@@ -32,6 +32,7 @@ import { OrderPageModule } from './pages/order/order.module';
 
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -50,15 +51,15 @@ import { OrderPageModule } from './pages/order/order.module';
     DeliverPageModule,
     ProgressPageModule,
     CalendarPageModule,
-    OrderPageModule
+    OrderPageModule,
+  
 
 
 
   ],
     providers: [
-    StatusBar,
+    StatusBar,  
     Clientform,
-
     StoreServiceService,
     RequetServiceService,
     SplashScreen,

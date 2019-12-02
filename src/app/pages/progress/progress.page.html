@@ -1,7 +1,7 @@
 
   <ion-list>
   
-      <ion-item-sliding *ngFor="let orders of OrderList">
+      <ion-item-sliding *ngFor="let orders of OrderList" >
        <ion-item lines="inset" button [routerLink]="['/tabs/edit-order', orders.id]">
        <ion-label>
             {{orders.customerID}}
