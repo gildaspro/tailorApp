@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>deliver</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
 
-</ion-content>
+  <ion-list *ngFor="let orders of OrderList">
+    <ion-title>open</ion-title>
+
+ <ion-item   detail="false" lines="inset"  button [routerLink]="['/tabs/edit-order', orders.id]">
+  <ion-buttons slot="end">
+      <ion-button (click)=" presentPopover($event)">
+          <ion-icon name="more" ></ion-icon>
+       </ion-button>
+    </ion-buttons>
+    <ion-label>
+         {{orders.customerID}}
+       <p>{{orders.Amount}}</p> 
+       <p>{{orders.Discound}}</p> 
+    </ion-label>
+   </ion-item>
+    <!-- progress  -->
+  <ion-title>progress</ion-title>
+      <ion-buttons>
+            <ion-button  (click)="pro(orders)">progress</ion-button>
+      </ion-buttons>
+     <!-- diliver -->
+     <ion-buttons>
+          <ion-button color='primary' (click)="deli(orders)">diliver</ion-button>
+     </ion-buttons>
+</ion-list>
+ <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/edit-order']" routerLinkActive="router-link-active" >
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-fab-button>
+   </ion-fab>
+

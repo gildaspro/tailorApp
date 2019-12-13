@@ -7,7 +7,7 @@ import { OpenPage } from './pages/open/open.page';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'welcome', loadChildren: './pages/welcome/welcome.module#WelcomePageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'edit-order', loadChildren:  './pages/edit-order/edit-order.module#EditOrderPageModule'},
   { path: 'testapp', loadChildren: './pages/testapp/testapp.module#TestappPageModule' },
   { path: 'customer-detail', loadChildren: './pages/customer-detail/customer-detail.module#CustomerDetailPageModule' },
+  { path: 'client', loadChildren:   './pages/clients/clients.module#ClientsPageModule'
+  },
   {
     path: 'tabs',
     component: TabsPage,

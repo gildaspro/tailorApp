@@ -20,8 +20,8 @@
   <ion-content padding>
 
   
-    <ion-slides #slides (ionSlideDidChange)="slideChanged()" scrollbar="true">
-      <ion-slide >
+    <ion-slides #slides mode="md" (ionSlideDidChange)="slideChanged()" scrollbar="true">
+      <ion-slide>
         <ion-nav [root]="open"></ion-nav>
       </ion-slide>
       <ion-slide>

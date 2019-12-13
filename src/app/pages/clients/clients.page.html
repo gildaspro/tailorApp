@@ -120,16 +120,12 @@
       
          
          <ion-item *ngIf="!clientId" padding-bottom >
-           <ion-button slot="end" size="large" expand="full" color="tertiary">Register</ion-button>
+           <ion-button slot="end" size="large" expand="full" color="tertiary" (click)="addclient()">Register</ion-button>
          </ion-item>
  
-          <ion-item  *ngIf="clientId " >
-            <ion-fab vertical="top" horizontal="end" slot="fixed">
-              <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/clients-list']" (click)="updateclient()"  >
-                <ion-icon name="create"></ion-icon>
-              </ion-fab-button>
-           </ion-fab>     
-          </ion-item >
+          <ion-item  *ngIf="clientId">
+            <ion-button  size="large" expand="full" color="tertiary"(click)="updateclient()">update</ion-button>
+         </ion-item >
      
             
          

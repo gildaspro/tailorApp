@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreServiceService, Client } from '../../services/store-service.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -11,8 +12,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ClientsListPage implements OnInit {
 
 clientList: Client[];
+private loaderToShow;
 constructor(private storeService: StoreServiceService,
-            private db: AngularFirestore) { }
+            private db: AngularFirestore,
+            public loadingController: LoadingController
+            ) { }
 
           
             loadData(event) {
@@ -34,8 +38,18 @@ ngOnInit() {
     this.storeService.removeClient(clients.id);
  }
  loadItem() {
+  this.loadingController.create({
+    message:'laoding'
+  }).then((overlay) => {
+  this.loaderToShow = overlay;
+  this.loaderToShow.present();
+  })  
+
     this.storeService.getClients().subscribe(res => {
    this.clientList = res ;
+   this.loaderToShow.dismiss();
+
  });
+
  }
 }

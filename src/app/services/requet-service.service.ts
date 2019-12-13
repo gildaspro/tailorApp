@@ -18,7 +18,10 @@ export interface Order {
    DateDeCreation: any;
    DateDeSupressiont: any;
    totalprice: any;
-   position: any;
+   position:any;
+   status:any ;
+
+
    
 }
 @Injectable({
@@ -28,9 +31,19 @@ export class RequetServiceService {
  open;
   private orderCollection: AngularFirestoreCollection<Order>;
   private orders: Observable<Order[]>;
-  constructor(private db: AngularFirestore) {
+  private progres:Observable<Order[]>;
+  private deliver:Observable<Order[]>;
+  private orderCollectionProgress: AngularFirestoreCollection<Order>;
+  private  orderCollectionDeliver: AngularFirestoreCollection<Order>;
+   constructor(private db: AngularFirestore) {
+  this.orderCollectionProgress = this.db.collection<Order> ('Orders',  ref => {
+      return ref.orderBy('position', 'desc').where('status', '==', 'progress');
+    });
+  this.orderCollectionDeliver = this.db.collection<Order> ('Orders',  ref => {
+      return ref.orderBy('position', 'desc').where('status', '==', 'deliver');
+    });
   this.orderCollection = this.db.collection<Order> ('Orders',  ref => {
-    return ref.orderBy('position', 'desc');
+    return ref.orderBy('position', 'desc').where('status', '==', 'open');
   });
 
   this.orders = this.orderCollection.snapshotChanges().pipe(
@@ -42,10 +55,40 @@ export class RequetServiceService {
       });
     })
   );
- }
 
- getClients() {
+   this.progres = this.orderCollectionProgress.snapshotChanges().pipe(
+    map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return {id, ...data};
+      });
+    })
+  );
+ 
+ 
+  this.deliver =  this.orderCollectionDeliver.snapshotChanges().pipe(
+    map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return {id, ...data};
+      });
+    })
+  );
+ 
+ 
+}
+
+
+getClients() {
   return this.orders;
+}
+getprogress(){
+  return this.progres;
+}
+getDeliver(){
+  return this.deliver;
 }
 
 getClient(id: string) {
@@ -67,32 +110,20 @@ addClient(order: Order) {
 removeClient(id: string) {
   return this.orderCollection.doc(id).delete();
 }
-inProgress( order) {
-this.move(order, 'progress');
+pro( id: string){
+  return this.orderCollectionProgress.doc(id).set({
+    status: 'progress'
+  }   , { merge: true } )
 }
-Delivre(order) {
-  this.move(order, 'deliver');
+deli(id: string){
+  return this.orderCollectionProgress.doc(id).set({
+    status: 'deliver'
+  }  , { merge: true } )
 }
-getArticleByMarque() {
-  return this.db.collection('Orders', ref =>
-    ref.where('status', '==', 'open')
-  ).snapshotChanges();
+opens(id: string){
+  return this.orderCollectionProgress.doc(id).set({
+    status: 'open'
+  } , { merge: true } )
 }
 
-
-move( order: Order , path: string) {
-  this.orderCollection.doc(order.id).delete();
-  const id = order.id;
-  delete order.id;
-  this.db.collection('progress',  ref => {
-    return ref.orderBy('position', 'desc').limit(1);
-  }).get().toPromise().then(actions => {
-    order.position = 0;
-    actions.forEach(a => {
-      order.position = a.data().position = 1 ;
-    });
-    return this.orderCollection.doc('${path}/${id}').set(order);
-  });
-
-}
 }

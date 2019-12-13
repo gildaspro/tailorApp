@@ -25,6 +25,9 @@ import { OpenPageModule } from './pages/open/open.module';
 import { DeliverPageModule } from './pages/deliver/deliver.module';
 import { ProgressPageModule } from './pages/progress/progress.module';
 import { OrderPageModule } from './pages/order/order.module';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { FcmService } from './fcm.service';
+import { TestappPageModule } from './pages/testapp/testapp.module';
 
 
 
@@ -52,18 +55,21 @@ import { OrderPageModule } from './pages/order/order.module';
     ProgressPageModule,
     CalendarPageModule,
     OrderPageModule,
-  
+    TestappPageModule,
+
+    
 
 
 
   ],
-    providers: [
-    StatusBar,  
+    providers: [   
+    Firebase,
+    StatusBar,
     Clientform,
     StoreServiceService,
     RequetServiceService,
+    FcmService,
     SplashScreen,
-    
    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
    
 ],

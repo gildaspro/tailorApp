@@ -5,7 +5,7 @@ import { AngularFirestore  } from '@angular/fire/firestore';
 import { Client } from '../../services/authservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthserviceService } from '../../services/authservice.service';
-
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -14,7 +14,8 @@ import { AuthserviceService } from '../../services/authservice.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
- 
+ private loaderToShow ;
+  show = false;
   constructor(
               private storeService: AuthserviceService,
               private route: ActivatedRoute,
@@ -22,7 +23,9 @@ export class RegisterPage implements OnInit {
               private nav: NavController,
               private router: Router,
               public navCtrl: NavController,
-              public fAuth: AngularFireAuth) {}
+              public fAuth: AngularFireAuth,
+              public loadingController: LoadingController
+              ) {}
   
   client: Client = {
   name: '',
@@ -42,7 +45,14 @@ export class RegisterPage implements OnInit {
 
 
   async register() {
+        this.loadingController.create({
+          message:'laoding'
+        }).then((overlay) => {
+        this.loaderToShow = overlay;
+        this.loaderToShow.present();
+        })
     try {
+
       const r = await this.fAuth.auth.createUserWithEmailAndPassword(
         this.client.email,
         this.client.password
@@ -50,14 +60,19 @@ export class RegisterPage implements OnInit {
       if (r) {
         alert('Successfully registered!');
         this.navCtrl.navigateRoot('login');
+
       }
 
+      
     } catch (err) {
      this.erromassage = err;
+
     }
+    this.loaderToShow.dismiss();
+
   }
 ngOnInit() {
-   this.clientId = this.route.snapshot.paramMap.get('id');
+ this.clientId = this.route.snapshot.paramMap.get('id');
    if (this.clientId) {
       this.storeService.getClient(this.clientId).subscribe(res => {
         this.client = res;
@@ -65,14 +80,16 @@ ngOnInit() {
     }
  }
 
-addclient() {
+addclient() { 
+  
      this.register();
-     this.storeService.addClient(this.client).then(() => {
+     this.storeService.addClient(this.client).then(() => { 
      this.router.navigateByUrl('/tabs/clients-list');
      this.showTaost('New Client Added');
   }, err => {
     this.showTaost('There was a problem adding your CLient :(');
   });
+
 }
 
 updateclient() {
@@ -90,6 +107,7 @@ showTaost(msg){
   }).then(toast => toast.present());
 
 }
+ 
 }
 
 

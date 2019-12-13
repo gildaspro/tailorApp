@@ -25,21 +25,21 @@
               <ion-icon ios="ios-home" md="md-home" class="icon" color='tertiary'></ion-icon>
           </div>
           <ion-label position="floating"class="label2">Address</ion-label>
-        <ion-input type="text" [(ngModel)]="client.Address"></ion-input>
+        <ion-input type="address" [(ngModel)]="client.Address"></ion-input>
       </ion-item>
       <ion-item>
           <div class="item-note" slot="start">
               <ion-icon ios="ios-call" md="md-call" class="icon" color='tertiary'></ion-icon>
           </div>
           <ion-label position="floating"class="label2">Phone Number</ion-label>
-        <ion-input type="text" [(ngModel)]="client.phoneNumber" ></ion-input>
+        <ion-input type="number" [(ngModel)]="client.phoneNumber" ></ion-input>
       </ion-item>
       <ion-item>
           <div class="item-note" slot="start">
               <ion-icon name="at" class="icon" color='tertiary'></ion-icon>
           </div>
           <ion-label position="floating"class="label2">Email</ion-label>
-      <ion-input type="text" [(ngModel)]="client.email" ></ion-input>
+      <ion-input type="email" [(ngModel)]="client.email" ></ion-input>
       </ion-item>
     
       <ion-item>
@@ -51,7 +51,7 @@
       </ion-item><p class="p">Already a member just  <a [routerLink]="['/login']" routerLinkActive="router-link-active"  >LOGIN</a> </p>
 
     </div>
-      <ion-button size="large" color="tertiary" expand="full"  class="padd" (click)="addclient()">Register</ion-button>
+      <ion-button size="large" color="tertiary" expand="full"  class="padd" (click)="register()">Register</ion-button>
       <div class="error"> {{ erromassage }} </div>
   
     </ion-content>

@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar color="tertiary">
+    <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/welcome"></ion-back-button>
           </ion-buttons>
@@ -8,28 +8,79 @@
   </ion-header>
   <ion-content>
 
-      <div padding-top>
-          <img src="../../../assets/img/ica-slidebox-img-4.png" width="60%" height="60%" alt="">
+      <div padding-top padding-buttom>
+          <img src="../../../assets/img/ica-slidebox-img-2.png" width="30%" height="30%" alt="">
+          <h1 class="title">TAILOR APP</h1>        
       </div>
-    <ion-item padding-top>
-        <div class="item-note" slot="start">
-            <ion-icon name="at" class="icon" color='tertiary'></ion-icon>
-        </div>
-        <ion-label position="floating"class="label2">Email</ion-label>
-        <ion-input type="text" [(ngModel)]="user.email" ></ion-input>
-    </ion-item>
+    
+      <ion-item class="pa">
+            <!-- <div class="item-note" slot="start">
+                <ion-icon name="lock" class="icon" color='tertiary'></ion-icon>
+            </div> -->
+            <!-- <ion-label position="floating" class="label2">password</ion-label> -->
+           <div class="input">
+              <ion-icon name="lock" class="icon" slot="start" color='tertiary'></ion-icon>
+              <ion-input type="email" class="section" placeholder="password" [(ngModel)]="user.email" ></ion-input>
+           </div>
+        </ion-item>
+       
   
-    <ion-item >
-        <div class="item-note" slot="start">
+    <ion-item  >
+        <!-- <div class="item-note" slot="start">
             <ion-icon name="lock" class="icon" color='tertiary'></ion-icon>
-        </div>
-        <ion-label position="floating"class="label2">password</ion-label>
-        <ion-input type="password" [(ngModel)]="user.password" ></ion-input>
-    </ion-item><p class="p" padding-top padding-bottom>Not yiet a member <a [routerLink]="['/register']" routerLinkActive="router-link-active"  >REGISTER</a> </p>
+        </div> -->
+        <!-- <ion-label position="floating" class="label2">password</ion-label> -->
+       <div class="input">
+          <ion-icon name="lock" class="icon" slot="start" color='tertiary'></ion-icon>
+          <ion-input type="password" class="section" placeholder="password" [(ngModel)]="user.password" ></ion-input>
+       </div>
+    </ion-item>
+    <button class="p" padding-top padding-bottom [routerLink]="['/register']" routerLinkActive="router-link-active" >Register me  </button>
+
+      <ion-button  size="large"    color="undefined" expand="full"  class="padd"(click)="login()">
+           LOGIN
+      </ion-button>
    
-    <ion-button  size="large"   color="tertiary" expand="full"  class="padd"(click)="login()">LONGIN</ion-button>
-  
-    <div class="error"> {{ erromassage}} </div>
+   <!-- <div class="error"> {{ erromassage}} </div>   -->
 
   </ion-content>
-  
+  <!-- <ion-content>
+ <form #f="ngForm" novalidate (ngSubmit)="onSubmit(f)">
+     <div class="main">
+    
+                <ion-row class="row">
+                    <div class="fire-logo">
+                      <img src="assets/logo.png" class="img-logo">
+                       <ion-text padding>
+                        <h2 no-margin margin-vertical text-center>Welcome to Ionic 4 Receive SMS</h2>
+                      </ion-text> 
+                    </div>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <ion-input clearInput type="email" placeholder="Email"  class="input" padding-horizontal
+                        clear-input="true"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                   <ion-item [hidden]="f.controls.email && (f.controls.email.valid || (f.controls.email.pristine && !isSubmitted))">
+                    <ion-text color="danger">Email is required</ion-text>
+                  </ion-item> 
+                  <ion-row>
+                    <ion-col>
+                      <ion-input clearInput type="password" placeholder="Password"  class="input"
+                        padding-horizontal clear-input="true"></ion-input>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <ion-button  expand="block"   color="undefined" class="transition">
+                        <strong class="white">
+                          Next</strong>
+                        </ion-button>
+                        <ion-button expand="full"  color="tertiary">Block Button</ion-button>
+
+                    </ion-col>
+                  </ion-row>
+     </div>
+ </form>
+</ion-content> -->

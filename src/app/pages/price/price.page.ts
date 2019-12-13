@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Price, PricingService } from 'src/app/services/pricing.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController, NavController } from '@ionic/angular';
+import { ToastController, NavController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-price',
@@ -21,10 +21,13 @@ export class PricePage implements OnInit {
               private route: ActivatedRoute,
               private Toastmsg: ToastController,
               private nav: NavController,
-              private router: Router) {}
+              private router: Router,
+              public loadingController: LoadingController
+              ) {}
 
  
   clientId = this.client.id;
+  private loaderToShow;
  
 ngOnInit() {
    this.clientId = this.route.snapshot.paramMap.get('id');
@@ -36,20 +39,40 @@ ngOnInit() {
  }
 
 addclient() {
+  this.loadingController.create({
+    message:'laoding'
+  }).then((overlay) => {
+  this.loaderToShow = overlay;
+  this.loaderToShow.present();
+  })  
+
   this.storeService.addClient(this.client).then(() => {
    this.router.navigateByUrl('/tabs/price-list');
    this.showTaost('New Client Added');
+   this.loaderToShow.dismiss();
+
   }, err => {
     this.showTaost('There was a problem adding your CLient :(');
   });
 }
 
 updateclient() {
+  this.loadingController.create({
+    message:'laoding'
+  }).then((overlay) => {
+  this.loaderToShow = overlay;
+  this.loaderToShow.present();
+  })  
+
   this.storeService.updateClient(this.client , this.clientId).then(() => {
    this.showTaost('New Client update');
+
   }, err => {
     this.showTaost('There was a problem updating your CLient :(');
+
   });
+  this.loaderToShow.dismiss();
+
 }
 
 showTaost(msg)  {

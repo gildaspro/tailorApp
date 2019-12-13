@@ -8,9 +8,32 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./progress.page.scss'],
 })
 export class ProgressPage implements OnInit {
+
+  orders: Order = {
+    Categorie:  '',
+    prixUnitaire:  '',
+    Quantite:  '',
+    PrixTotal:  '',
+    Notes:  '',
+    CustomerRef:  '',
+    Amount:  '',
+    Discound:  '',
+    customerID:  '',
+    DateDeLivration:  '',
+    DateDeCreation: '',
+    DateDeSupressiont:  '',
+    totalprice: '',
+    position: '',
+    status:'',
+
+   };
+
+
+  progress =this.orders.status;
   navCtl: NavController;
   OrderList: Order[] ;
-    constructor(private db: AngularFirestore, private orderService: RequetServiceService,  ) {
+    constructor(private db: AngularFirestore, 
+                private orderService: RequetServiceService,  ) {
       }
       goOrder(){
         this.navCtl.navigateRoot('open/edit-order');
@@ -28,7 +51,7 @@ export class ProgressPage implements OnInit {
         }, 10000);
       }
     ngOnInit() {
-     this.loadItem();
+      this.statusProgress()
      
     }
     
@@ -39,11 +62,31 @@ export class ProgressPage implements OnInit {
         this.OrderList = res;
       });
   }
+  deli(orders: Order){
+    this.orderService.deli(orders.id)
+  }
+  pro(orders: Order){
+    this.orderService.pro(orders.id).then( value => {
+     console.log(value); // "Succès!"
+   }).catch(function(e) {
+     console.log(e); // "zut !"
+   });
 
-
-    l(){
-      this.orderService.getClients().subscribe(res => {
-        this.OrderList = res;
-      });
+  }
+   
+  
+  statusProgress() {
+    this.progress = 'progress';
+     this.orderService.getprogress().subscribe( res => {
+      this.OrderList = res
     }
+  )
+ }
+ statusDeliver() {
+  this.progress = 'deliver';
+  this.orderService.getDeliver().subscribe( res => {
+  this.OrderList = res
+    }
+   )
+ }
 }

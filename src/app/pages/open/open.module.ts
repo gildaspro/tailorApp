@@ -6,21 +6,26 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { OpenPage } from './open.page';
+import { TestappPage } from '../testapp/testapp.page';
+import { TestappPageModule } from '../testapp/testapp.module';
 
 const routes: Routes = [
   {
     path: '',
     component: OpenPage
-  }
+  },
+  
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    TestappPageModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+
   ],
-  declarations: [OpenPage]
+  declarations: [OpenPage ]
 })
 export class OpenPageModule {}

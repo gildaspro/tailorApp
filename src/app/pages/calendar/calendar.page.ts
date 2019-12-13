@@ -71,11 +71,13 @@ export class CalendarPage implements OnInit {
    // Change current month/week/day
  next() {
   var swiper = document.querySelector('.swiper-container')['swiper'];
-  swiper.slideNext();}
+  swiper.slideNext();
+}
 
 back() {
   var swiper = document.querySelector('.swiper-container')['swiper'];
-  swiper.slidePrev();}
+  swiper.slidePrev();
+}
 
 // Change between month/week/day
 changeMode(mode) {

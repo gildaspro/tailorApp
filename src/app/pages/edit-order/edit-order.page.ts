@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ToastController, NavController, NavParams } from '@ionic/angular';
+import { ToastController, NavController, NavParams, LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RequetServiceService, Order } from 'src/app/services/requet-service.service';
 
@@ -26,6 +26,7 @@ export class EditOrderPage implements OnInit {
     DateDeSupressiont:  '',
     totalprice: '',
     position: '',
+    status:'open'
 
    };
 
@@ -33,12 +34,15 @@ export class EditOrderPage implements OnInit {
                private toastmsg: ToastController,
                private   rootNavCtrl: NavController,
                private route: ActivatedRoute,
-               private orderService: RequetServiceService) {
+               private orderService: RequetServiceService,
+               public loadingController: LoadingController
+               ) {
 
                 }
                clientId = this.orders.id;
                pos = this.orders.position;
                totalprice ;
+               loaderToShow;
                ngOnInit() {
                 this.clientId = this.route.snapshot.paramMap.get('id');
                 if (this.clientId) {
@@ -51,30 +55,64 @@ export class EditOrderPage implements OnInit {
 
 
              addOrder() {
+              this.loadingController.create({
+                message:'laoding'
+              }).then((overlay) => {
+              this.loaderToShow = overlay;
+              this.loaderToShow.present();
+              })  
+            
                 this.orderService.addClient(this.orders).then(() => {
-                  this.rootNavCtrl.navigateForward('/tabs/order');
+                this.rootNavCtrl.navigateForward('/tabs/order');
                 this.showTaost('New order Added');
+                this.loaderToShow.dismiss();
+
               }, err => {
                  this.showTaost('There was a problem adding your CLient :(');
+
                });
+         
+
              }
 
              updateOrder() {
+              this.loadingController.create({
+                message:'laoding'
+              }).then((overlay) => {
+              this.loaderToShow = overlay;
+              this.loaderToShow.present();
+              })  
+            
                this.orderService.updateClient(this.orders , this.clientId).then(() => {
                this.rootNavCtrl.navigateForward('/tabs/order');
 
                 this.showTaost('New Client update');
+
                }, err => {
                  this.showTaost('There was a problem updating your CLient :(');
+
                });
+               this.loaderToShow.dismiss();
+
              }
              remove() {
+              this.loadingController.create({
+                message:'laoding'
+              }).then((overlay) => {
+              this.loaderToShow = overlay;
+              this.loaderToShow.present();
+              })  
+            
               this.orderService.removeClient(this.clientId).then(() => {
                 this.rootNavCtrl.navigateForward('/tabs/order');
                 this.showTaost('Oder deleted succesfully');
+
                }, err => {
                  this.showTaost('There was a problem updating your CLient :(');
+
                });
+               this.loaderToShow.dismiss();
+
            }
              showTaost(msg) {
                this.toastmsg.create({
