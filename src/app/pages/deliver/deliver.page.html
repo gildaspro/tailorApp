@@ -1,30 +1,23 @@
 
-
-  <ion-list *ngFor="let orders of OrderList">
-    <ion-title>open</ion-title>
-
- <ion-item   detail="false" lines="inset"  button [routerLink]="['/tabs/edit-order', orders.id]">
-  <ion-buttons slot="end">
-      <ion-button (click)=" presentPopover($event)">
-          <ion-icon name="more" ></ion-icon>
-       </ion-button>
-    </ion-buttons>
-    <ion-label>
-         {{orders.customerID}}
+ <ion-list>
+  
+  <ion-item-sliding *ngFor="let orders of OrderList" >
+   <ion-item lines="inset"    button [routerLink]="['/tabs/edit-order', orders.id]">
+   <ion-label>
+        {{orders.customerID}}
        <p>{{orders.Amount}}</p> 
        <p>{{orders.Discound}}</p> 
     </ion-label>
    </ion-item>
-    <!-- progress  -->
-  <ion-title>progress</ion-title>
-      <ion-buttons>
-            <ion-button  (click)="pro(orders)">progress</ion-button>
-      </ion-buttons>
-     <!-- diliver -->
-     <ion-buttons>
-          <ion-button color='primary' (click)="deli(orders)">diliver</ion-button>
-     </ion-buttons>
-</ion-list>
+   <ion-item-options side="end" >
+      <ion-item-option color="tertiary"   (click)="remove(orders)">
+          <ion-icon name="trash" class="icon1" slot="end"></ion-icon>
+      </ion-item-option>
+     
+    </ion-item-options>
+
+  </ion-item-sliding>
+ </ion-list>
  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" >
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"

@@ -3,6 +3,7 @@ import { Price, PricingService } from 'src/app/services/pricing.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController, NavController, LoadingController } from '@ionic/angular';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-price',
@@ -66,12 +67,12 @@ updateclient() {
 
   this.storeService.updateClient(this.client , this.clientId).then(() => {
    this.showTaost('New Client update');
+   this.loaderToShow.dismiss();
 
   }, err => {
     this.showTaost('There was a problem updating your CLient :(');
 
   });
-  this.loaderToShow.dismiss();
 
 }
 
@@ -81,5 +82,8 @@ showTaost(msg)  {
     duration: 2000
   }).then(toast => toast.present());
 
+}
+onSubmit(form:NgForm) {
+  console.log(form.value);
 }
 }

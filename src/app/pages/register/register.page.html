@@ -11,48 +11,76 @@
       <div class="center">
           <img src="../../../assets/img/ica-slidebox-img-4.png" width="50%" height="50%" alt="">
       </div>
-
-    <div >
-      <ion-item>
+  <form  name="form" (ngSubmit)="onSubmit(f)" #f="ngForm"  padding-buttom>
+    <div class="pa">
+      <ion-item class="form-group" >
           <div class="item-note" slot="start">
               <ion-icon name="person" class="icon" color='tertiary'></ion-icon>
           </div>
           <ion-label position="floating"class="label2">Name</ion-label>
-        <ion-input type="text" [(ngModel)]="client.name"></ion-input>
+        <ion-input type="text" [(ngModel)]="client.name" name="name" #name="ngModel" minlength="4"  required ></ion-input>
       </ion-item>
-      <ion-item>
-          <div class="item-note" slot="start">
-              <ion-icon ios="ios-home" md="md-home" class="icon" color='tertiary'></ion-icon>
-          </div>
+            <div *ngIf="name.invalid && (name.dirty|| name.touched)"slot="end" class="invalid-feedback">
+                <div *ngIf="name.errors.required"> Name is required</div>
+                <div *ngIf="name.errors.minlength">Name must be at least 4 words</div>
+            </div>
+      
+       <ion-item class="form-group" >
+             <div class="item-note" slot="start">
+                  <ion-icon name="home" class="icon" color='tertiary'></ion-icon>
+             </div>
           <ion-label position="floating"class="label2">Address</ion-label>
-        <ion-input type="address" [(ngModel)]="client.Address"></ion-input>
-      </ion-item>
-      <ion-item>
-          <div class="item-note" slot="start">
-              <ion-icon ios="ios-call" md="md-call" class="icon" color='tertiary'></ion-icon>
-          </div>
-          <ion-label position="floating"class="label2">Phone Number</ion-label>
-        <ion-input type="number" [(ngModel)]="client.phoneNumber" ></ion-input>
-      </ion-item>
-      <ion-item>
-          <div class="item-note" slot="start">
-              <ion-icon name="at" class="icon" color='tertiary'></ion-icon>
-          </div>
-          <ion-label position="floating"class="label2">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="client.email" ></ion-input>
-      </ion-item>
-    
-      <ion-item>
-          <div class="item-note" slot="start">
-              <ion-icon name="lock" class="icon" color='tertiary'></ion-icon>
-          </div>
-          <ion-label position="floating"class="label2">password</ion-label>
-         <ion-input type="password" [(ngModel)]="client.password" ></ion-input>
-      </ion-item><p class="p">Already a member just  <a [routerLink]="['/login']" routerLinkActive="router-link-active"  >LOGIN</a> </p>
+          <ion-input type="text" [(ngModel)]="client.Address" name="address" #address="ngModel"   required ></ion-input>
+       </ion-item>
+            <div *ngIf="address.invalid && (address.dirty|| address.touched)" slot="end"class="invalid-feedback">
+                <div *ngIf="name.errors.required"> Address is required</div>
+            </div>
+      
 
-    </div>
-      <ion-button size="large" color="tertiary" expand="full"  class="padd" (click)="register()">Register</ion-button>
-      <div class="error"> {{ erromassage }} </div>
-  
-    </ion-content>
+        <ion-item class="form-group" >
+                <div class="item-note" slot="start">
+                     <ion-icon name="call" class="icon" color='tertiary'></ion-icon>
+                </div>
+             <ion-label position="floating"class="label2">Phone Number</ion-label>
+             <ion-input type="text" [(ngModel)]="client.phoneNumber" name="phoneNumber" minlength="9" #phoneNumber="ngModel"   required ></ion-input>
+        </ion-item>
+               <div slot="end" *ngIf="phoneNumber.invalid && (phoneNumber.dirty|| phoneNumber.touched)" class="invalid-feedback">
+                   <div *ngIf="phoneNumber.errors.required"> phoneNumber is required</div>
+                   <div *ngIf="phoneNumber.errors.minlength"> phoneNumber must be at least 9 characters</div>
+               </div>
+
+        
+       <ion-item class="form-group" >
+                  <div class="item-note" slot="start">
+                       <ion-icon name="at" class="icon" color='tertiary'></ion-icon>
+                  </div>
+               <ion-label position="floating"class="label2">Email</ion-label>
+               <ion-input type="text" [(ngModel)]="client.email" name="email" email #email="ngModel"   required ></ion-input>
+       </ion-item>
+                 <div *ngIf="email.invalid && (email.dirty|| email.touched)" slot="end" class="invalid-feedback">
+                     <div *ngIf="email.errors.required"> email is required</div>
+                     <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                 </div>
+
+
+       <ion-item class="form-group" >
+                    <div class="item-note" slot="start">
+                         <ion-icon name="lock" class="icon" color='tertiary'></ion-icon>
+                    </div>
+                 <ion-label position="floating"class="label2"> Password</ion-label>
+                 <ion-input type="text" [(ngModel)]="client.password" name="password"  #password="ngModel"   required minlength="6"></ion-input>
+      </ion-item>
+                   <div *ngIf=" password.invalid && ( password.dirty||  password.touched)" slot="end" class="invalid-feedback">
+                       <div *ngIf="password.errors.required">  Password is required</div>
+                       <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                   </div>
+       </div>
     
+     <ion-button  size="large"    color="undefined" expand="full" type="Submit" class="padd"(click)="register()">
+                Register
+     </ion-button>
+              
+  </form>
+
+  </ion-content>
+  

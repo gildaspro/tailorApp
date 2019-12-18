@@ -4,26 +4,23 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-list>
-<ion-item-sliding *ngFor="let price of clientList  ">
+    <ion-list >
+<ion-item-sliding *ngFor="let price of clientList ">
         
-    <ion-item lines="inset" button [routerLink]="['/tabs/price', price.id]">
+    <ion-item lines="insert" button [routerLink]="['/tabs/price', price.id]">
      
-  <ion-label>
-   
+  <ion-label  class="padd">
     <h2 class="name"> {{price.name}}  </h2>
-      
- </ion-label>
+</ion-label>
 
-  <h6 color="tertiary">
+  <h6 color="tertiary"  class="padd">
      {{price.price}}
   </h6>
 
 </ion-item>
 <ion-item-options side="end" (ionSwipe)="remove(price)">
-  <ion-item-option (click)="remove(price)" color="secondary">
-      DELETE
-      <ion-icon name="chsckmark" slot="end"></ion-icon>
+  <ion-item-option (click)="remove(price)" color="tertiary">
+      <ion-icon name="trash" class="icon" slot="end"></ion-icon>
   </ion-item-option>
  
 </ion-item-options>

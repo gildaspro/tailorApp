@@ -86,5 +86,7 @@ export class DeliverPage implements OnInit {
           }
          )
        }
-   
+       remove(orders: Order) {
+        this.orderService .removeClient(orders.id);
+      }
 }

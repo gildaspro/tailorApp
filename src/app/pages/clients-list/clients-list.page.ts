@@ -23,10 +23,10 @@ constructor(private storeService: StoreServiceService,
               setTimeout(() => {
                 console.log('Done');
                 event.target.complete();
-                this.loadItem();
                 if (this.clientList.length == 1000) {
                   event.target.disabled = true;
                 }
+
               }, 1000);
             }
 
@@ -45,11 +45,12 @@ ngOnInit() {
   this.loaderToShow.present();
   })  
 
-    this.storeService.getClients().subscribe(res => {
-   this.clientList = res ;
-   this.loaderToShow.dismiss();
+   this.storeService.getClients().subscribe(res => {
+    this.loaderToShow.dismiss();
+    this.clientList = res ;
 
  });
 
  }
+ 
 }

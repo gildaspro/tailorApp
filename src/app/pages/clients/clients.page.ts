@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Clientform } from '../../clientform';
-import { FormGroup , FormBuilder , Validators} from '@angular/forms';
+import { FormGroup , FormBuilder , Validators, NgForm} from '@angular/forms';
 import { database } from 'firebase';
 import { format } from 'url';
 import { StoreServiceService, Client } from '../../services/store-service.service';
@@ -63,7 +63,7 @@ ngOnInit() {
 
 addclient() {
   this.loadingController.create({
-    message:'laoding'
+    message:'laoding ...'
   }).then((overlay) => {
   this.loaderToShow = overlay;
   this.loaderToShow.present();
@@ -71,8 +71,8 @@ addclient() {
 
   this.storeService.addClient(this.client).then(() => {
   this.router.navigateByUrl('/tabs/clients-list');
-  this.showTaost('New Client Added');
   this.loaderToShow.dismiss();
+  this.showTaost('New Client Added');
 
   }, err => {
     this.showTaost('There was a problem adding your CLient :(');
@@ -106,5 +106,8 @@ showTaost(msg){
     duration: 2000
   }).then(toast => toast.present());
 
+}
+onSubmit(form:NgForm) {
+  console.log(form.value);
 }
 }

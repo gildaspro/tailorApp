@@ -6,6 +6,7 @@ import { Client } from '../../services/authservice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthserviceService } from '../../services/authservice.service';
 import { LoadingController } from '@ionic/angular';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class RegisterPage implements OnInit {
   
   clientId = this.client.id;
 
-
+  
   async register() {
         this.loadingController.create({
           message:'laoding'
@@ -63,7 +64,8 @@ export class RegisterPage implements OnInit {
 
       }
 
-      
+      this.loaderToShow.dismiss();
+
     } catch (err) {
      this.erromassage = err;
 
@@ -107,7 +109,9 @@ showTaost(msg){
   }).then(toast => toast.present());
 
 }
- 
+onSubmit(form:NgForm) {
+  console.log(form.value);
+}
 }
 
 

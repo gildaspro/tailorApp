@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 export class User {
     email: string;
@@ -53,9 +53,10 @@ export class LoginPage implements OnInit {
     } catch (err) {
      this.erromassage = err;
      alert(this.erromassage);
-
     }     
      this.loaderToShow.dismiss();
+     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.user))
+
 
   }
 
@@ -86,7 +87,9 @@ export class LoginPage implements OnInit {
    this.loaderToShow.present() 
    if(this.show == false){
     this.loaderToShow.dismiss() 
-  
    }
+  }
+  onSubmit(form:NgForm) {
+    console.log(form.value);
   }
 }

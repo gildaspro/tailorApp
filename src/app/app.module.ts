@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { TooltipsModule } from 'ionic-tooltips';
 
 import { environment } from 'src/environments/environment';
 import { NgCalendarModule  } from 'ionic2-calendar';
@@ -28,6 +29,7 @@ import { OrderPageModule } from './pages/order/order.module';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { FcmService } from './fcm.service';
 import { TestappPageModule } from './pages/testapp/testapp.module';
+import { CalenderserviceService } from './services/calenderservice.service';
 
 
 
@@ -68,6 +70,7 @@ import { TestappPageModule } from './pages/testapp/testapp.module';
     Clientform,
     StoreServiceService,
     RequetServiceService,
+    CalenderserviceService,
     FcmService,
     SplashScreen,
    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

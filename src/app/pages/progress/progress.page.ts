@@ -65,6 +65,9 @@ export class ProgressPage implements OnInit {
   deli(orders: Order){
     this.orderService.deli(orders.id)
   }
+  remove(orders: Order) {
+    this.orderService .removeClient(orders.id);
+  }
   pro(orders: Order){
     this.orderService.pro(orders.id).then( value => {
      console.log(value); // "Succès!"

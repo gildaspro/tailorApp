@@ -8,32 +8,37 @@
 </ion-header>
 
 <ion-content class="body">
-
+ 
+  <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm" >
     <ion-item padding-top>
-       
-        <ion-label position="floating"class="label2">NAME</ion-label>
-        <ion-input  [(ngModel)]="client.name" ></ion-input>
+       <ion-label position="floating"class="label2">NAME</ion-label>
+        <ion-input  [(ngModel)]="client.name" name="name" #name="ngModel" minlength="4"  required></ion-input>
     </ion-item>
-  
-    <ion-item padding-top>
-        
-        <ion-label position="floating"class="label2">PRICE</ion-label>
-        <ion-input  [(ngModel)]="client.price"  ></ion-input>
+    <div *ngIf="name.invalid && (name.dirty|| name.touched)"slot="end" class="invalid-feedback">
+      <div *ngIf="name.errors.required"> name is required</div>
+      <div *ngIf="name.errors.minlength">name must be at least 4 words</div>
+   </div>
+
+    <ion-item padding-top padding-bottom>
+        <ion-label position="floating" class="label2">PRICE</ion-label>
+        <ion-input  [(ngModel)]="client.price" name="price" type="number" #price="ngModel" number  required></ion-input>
     </ion-item>
+    <div *ngIf="name.invalid && (name.dirty|| name.touched)"slot="end" class="invalid-feedback">
+      <div *ngIf="name.errors.required">price is required</div>
+      <div *ngIf="name.errors.number">please enter a number</div>
+   </div>
+</form>
 
 
+<ion-footer *ngIf="!clientId"  class="icon" >
   
-
-
-<ion-footer *ngIf="!clientId"  padding >
-  
-    <ion-button  class="mb" size="large"  color="tertiary" expand="full"  (click)="addclient()"  ><ion-icon color="success" name="add-circle" slot="start"></ion-icon>Register</ion-button>
+    <ion-button  size="large"  color="tertiary"  expand="block"  (click)="addclient()"  >Register</ion-button>
 
 </ion-footer>
 
 
 <ion-footer  *ngIf="clientId " class="icon" >
-  <ion-button  size="large" color="tertiary" slot="bottom" expand="block" [routerLink]="['/tabs/price-list']"(click)="updateclient()"  >Register</ion-button>
+  <ion-button  size="large" color="tertiary" slot="bottom"  expand="block" [routerLink]="['/tabs/price-list']"(click)="updateclient()"  >update</ion-button>
 </ion-footer >
 </ion-content>
 

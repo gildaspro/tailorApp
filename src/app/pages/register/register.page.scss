@@ -15,14 +15,31 @@
     font-size: 16px;
     font-weight: 200;
 }
+.invalid-feedback{
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
 .p{
     text-align: center;
     justify-content: center;
     color:black;
    
 }
+.pa{
+    overflow-x: scroll;
+
+}
 .padd{
-    margin-top: 1rem;
+    margin: 0;
+    position: absolute;
+    bottom: -20%;
+    right: 0;
+    left: 0;
+    font-weight: 100;
+    background:#380bcc;
+    
 }
 .center{
     text-align: center;

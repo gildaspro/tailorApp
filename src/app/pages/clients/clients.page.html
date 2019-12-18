@@ -10,19 +10,30 @@
         
         <ion-content class="container">
          <ion-list lines="full" >
-            
+ 
              <ion-list-header class="h4c"> <h4 color="medium-tint">Contact</h4></ion-list-header>
              <ion-item class="form-group">
               <ion-label class="label"  padding-end class="name">Full Name :</ion-label>
-              <ion-input [(ngModel)]="client.FullName" type="text" placeholder="stacked" padding-start></ion-input>
+              <ion-input [(ngModel)]="client.FullName" type="text"   placeholder="fullname"    padding-start></ion-input>
              </ion-item>
+                
              <ion-item class="form-group">
                 <ion-label class="label"  class="name">Email :</ion-label>
-                <ion-input [(ngModel)]="client.email" type="text" placeholder="email"  class="input"></ion-input>
+                <ion-input [(ngModel)]="client.email"  type="text" placeholder="email"  class="input"></ion-input>
               </ion-item>
+           
               <ion-item class="form-group">
                   <ion-label class="label"  class="name">Gender :</ion-label>
-                  <ion-input [(ngModel)]="client.Gender" type="text" placeholder="gender" class="input" ></ion-input>
+                  <ion-select value="notifications" class="dis" placeholder="genter" [(ngModel)]="client.Gender" >
+                        <ion-select-option>
+                          <ion-item>
+                            <ion-label>
+                                 <h2 class="h1"class="dis" color="light-contrast">female</h2>
+                            </ion-label>
+                           </ion-item>
+                        </ion-select-option>
+                        <ion-select-option value="male" class="dis">male</ion-select-option> 
+                  </ion-select>
               </ion-item>
               <ion-list-header class="h4c"> <h4  color="medium">Measurement(meter)</h4> </ion-list-header>
 
@@ -116,16 +127,18 @@
                    
                 </ion-grid>
               </ion-row>
+           
          </ion-list>
       
          
-         <ion-item *ngIf="!clientId" padding-bottom >
-           <ion-button slot="end" size="large" expand="full" color="tertiary" (click)="addclient()">Register</ion-button>
-         </ion-item>
+         <footer *ngIf="!clientId" padding-bottom >
+           <ion-button  size="large" expand="block" color="tertiary" (click)="addclient()">Register</ion-button>
+         </footer>
  
-          <ion-item  *ngIf="clientId">
-            <ion-button  size="large" expand="full" color="tertiary"(click)="updateclient()">update</ion-button>
-         </ion-item >
+          <footer *ngIf="clientId">
+            <ion-button  size="large" expand="block" color="tertiary"(click)="updateclient()">update</ion-button>
+          </footer >
+
      
             
          

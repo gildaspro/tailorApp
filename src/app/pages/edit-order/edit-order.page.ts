@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastController, NavController, NavParams, LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RequetServiceService, Order } from 'src/app/services/requet-service.service';
+import { Client, StoreServiceService } from 'src/app/services/store-service.service';
 
 @Component({
   selector: 'app-edit-order',
@@ -35,12 +36,15 @@ export class EditOrderPage implements OnInit {
                private   rootNavCtrl: NavController,
                private route: ActivatedRoute,
                private orderService: RequetServiceService,
-               public loadingController: LoadingController
+               public loadingController: LoadingController,
+               private storeService: StoreServiceService,
                ) {
 
                 }
                clientId = this.orders.id;
                pos = this.orders.position;
+               clientList: Client[];
+
                totalprice ;
                loaderToShow;
                ngOnInit() {
@@ -50,7 +54,8 @@ export class EditOrderPage implements OnInit {
                      this.orders = res;
                    });
                   }
-              }
+                  this.loadItem();
+           }
 
 
 
@@ -121,4 +126,22 @@ export class EditOrderPage implements OnInit {
                }).then(toast => toast.present());
 
              }
+             loadItem() {
+               this.storeService.getClients().subscribe(res => {
+                this.clientList = res ;
+            
+             });
+            
+             }
+        
+             loadData(event) {
+              setTimeout(() => {
+                console.log('Done');
+                event.target.complete();
+                if (this.clientList.length == 1000) {
+                  event.target.disabled = true;
+                }
+
+              }, 1000);
+            }
 }
