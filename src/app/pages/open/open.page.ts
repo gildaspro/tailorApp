@@ -4,6 +4,7 @@ import { NavController, PopoverController } from '@ionic/angular';
 import { EditOrderPage } from '../edit-order/edit-order.page';
 import { TestappPage } from '../testapp/testapp.page';
 import { RequetServiceService, Order } from 'src/app/services/requet-service.service';
+import { StoreServiceService, Client } from '../../services/store-service.service';
 import { map } from 'rxjs/operators';
 import { resolve } from 'url';
 
@@ -30,7 +31,7 @@ export class OpenPage implements OnInit {
     DateDeSupressiont:  '',
     totalprice: '',
     position: '',
-    status:'',
+    status:'open',
 
    };
 
@@ -42,7 +43,8 @@ export class OpenPage implements OnInit {
   progress =this.orders.status;
   orderId=this.orders.id
 
-  constructor(private db: AngularFirestore, 
+  constructor(private db: AngularFirestore,
+              private storeService: StoreServiceService, 
               private orderService: RequetServiceService,
               public popoverController: PopoverController  ) {
     }
@@ -73,8 +75,9 @@ export class OpenPage implements OnInit {
   // this.statusDeliver() 
   }
  
-  remove(orders: Order) {
-    this.orderService .removeClient(orders.id);
+  remove(id) {
+    this.orderService.removeClient(id);
+    console.log(id)
   }
    pro(orders: Order){
      this.orderService.pro(orders.id).then( value => {

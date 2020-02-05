@@ -18,7 +18,7 @@
               <ion-icon name="person" class="icon" color='tertiary'></ion-icon>
           </div>
           <ion-label position="floating"class="label2">Name</ion-label>
-        <ion-input type="text" [(ngModel)]="client.name" name="name" #name="ngModel" minlength="4"  required ></ion-input>
+        <ion-input type="text" [(ngModel)]="client.displayName" name="name" #name="ngModel" minlength="4"  required ></ion-input>
       </ion-item>
             <div *ngIf="name.invalid && (name.dirty|| name.touched)"slot="end" class="invalid-feedback">
                 <div *ngIf="name.errors.required"> Name is required</div>
@@ -76,7 +76,7 @@
                    </div>
        </div>
     
-     <ion-button  size="large"    color="undefined" expand="full" type="Submit" class="padd"(click)="register()">
+     <ion-button  size="large"    color="undefined" expand="full" type="Submit"  [disabled]="!f.valid"  class="padd"(click)="signUp(client)">
                 Register
      </ion-button>
               

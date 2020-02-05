@@ -34,8 +34,8 @@ ngOnInit() {
   this.loadItem();
   
 }
- remove(clients: Client) {
-    this.storeService.removeClient(clients.id);
+ remove(id) {
+    this.storeService.removeClient(id);
  }
  loadItem() {
   this.loadingController.create({
@@ -44,10 +44,9 @@ ngOnInit() {
   this.loaderToShow = overlay;
   this.loaderToShow.present();
   })  
-
    this.storeService.getClients().subscribe(res => {
-    this.loaderToShow.dismiss();
-    this.clientList = res ;
+   this.loaderToShow.dismiss();
+   this.clientList = res ;
 
  });
 

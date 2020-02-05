@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="undefined" class="pad">
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/welcome"></ion-back-button>
           </ion-buttons>
@@ -37,7 +37,7 @@
     </ion-item>
     <button class="p" padding-top padding-bottom [routerLink]="['/register']" routerLinkActive="router-link-active" >Register me  </button>
 
-      <ion-button  size="large"    color="undefined" expand="full"  class="padd"(click)="login()">
+      <ion-button  size="large"    color="undefined" expand="full"  class="padd"(click)="login(user)">
            LOGIN
       </ion-button>
    

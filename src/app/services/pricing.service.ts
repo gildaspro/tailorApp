@@ -17,8 +17,10 @@ export class PricingService {
 
   private pricesCollection: AngularFirestoreCollection<Price>;
   private prices: Observable<Price[]>;
+  uid: any;
   constructor(private db: AngularFirestore) {
-  this.pricesCollection = this.db.collection<Price> ('price' );
+    this.uid = JSON.parse(localStorage.getItem('user'));
+    this.pricesCollection =  this.db.collection("userdata").doc(this.uid).collection<Price> ('price' );
   
   this.prices = this.pricesCollection.snapshotChanges().pipe(
     map(actions => {

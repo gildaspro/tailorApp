@@ -35,14 +35,17 @@ export class RequetServiceService {
   private deliver:Observable<Order[]>;
   private orderCollectionProgress: AngularFirestoreCollection<Order>;
   private  orderCollectionDeliver: AngularFirestoreCollection<Order>;
+  uid: any;
    constructor(private db: AngularFirestore) {
-  this.orderCollectionProgress = this.db.collection<Order> ('Orders',  ref => {
+  this.uid = JSON.parse(localStorage.getItem('user'));
+
+  this.orderCollectionProgress = this.db.collection("userdata").doc(this.uid).collection<Order> ('Orders',  ref => {
       return ref.orderBy('position', 'desc').where('status', '==', 'progress');
     });
-  this.orderCollectionDeliver = this.db.collection<Order> ('Orders',  ref => {
+  this.orderCollectionDeliver = this.db.collection("userdata").doc(this.uid).collection<Order> ('Orders',  ref => {
       return ref.orderBy('position', 'desc').where('status', '==', 'deliver');
     });
-  this.orderCollection = this.db.collection<Order> ('Orders',  ref => {
+  this.orderCollection =this.db.collection("userdata").doc(this.uid).collection<Order>('Orders',  ref => {
     return ref.orderBy('position', 'desc').where('status', '==', 'open');
   });
 

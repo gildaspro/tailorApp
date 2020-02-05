@@ -22,8 +22,8 @@
        </ion-label>
  
       </ion-item>
-      <ion-item-options side="end" (ionSwipe)="remove(clients)">
-        <ion-item-option (click)="remove(clients)" color="tertiary">
+      <ion-item-options side="end" (ionSwipe)="remove(clients.id)">
+        <ion-item-option (click)="remove(clients.id)" color="tertiary">
           <ion-icon class="font" ios="ios-trash" md="md-trash"></ion-icon>
           <!-- <ion-icon name="chsckmark" slot="end"></ion-icon> -->
         </ion-item-option>

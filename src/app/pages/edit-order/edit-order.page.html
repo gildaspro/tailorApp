@@ -113,19 +113,18 @@
         <ion-icon name="person" class="icon bottom"  ></ion-icon>
       </section>
       
-      <ion-item class="rightSection">
-       
-            <ion-label position="floating" class="label2">Customer </ion-label>
-            <ion-select value="notifications" [(ngModel)]="orders.customerID"interface="action-sheet">
-              <ion-select-option value="enable"  *ngFor="let clients of clientList">
-                
-                <ion-item  button [routerLink]="['/tabs/clients', clients.id]">
-                 <ion-label>
-                      <h2 class="h1" color="light-contrast">{{clients.FullName}}</h2>
-                 </ion-label>
-                </ion-item>
-             </ion-select-option>
-            </ion-select>
+      <ion-item class="rightSection" >
+      <ion-label position="floating" class="label2">Customer </ion-label>
+      <ion-select value="notifications" [(ngModel)]="orders.customerID" interface="action-sheet">
+        <ion-item   *ngFor="let clients of clientList">
+              <ion-select-option>
+                <ion-label>
+                    <h2 class="h1"class="dis" color="light-contrast">{{clients.FullName}}</h2>
+                </ion-label>
+              </ion-select-option> 
+            </ion-item>
+      </ion-select>
+
       
       </ion-item>
   </section> 
@@ -152,16 +151,20 @@
 
 <ion-footer *ngIf="!clientId">
   <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/order']" (click)=" addOrder() "  >
+    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/order']" (click)="addOrder()"  >
       <ion-icon name="add-circle"></ion-icon>
     </ion-fab-button>
  </ion-fab>     
 </ion-footer>
 <ion-footer *ngIf="clientId">
   <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/order']" (click)=" addOrder() "  >
+    <ion-fab-button color="tertiary" vetical="end" horizontal="end" [routerLink]="['/tabs/order']" (click)="updateOrder()"  >
       <ion-icon name="add-circle"></ion-icon>
     </ion-fab-button>
  </ion-fab>     
 </ion-footer>
+
+   <ion-button  size="large"  color="tertiary"  expand="block"  (click)=" NotificationShedule()"  >Register</ion-button>
+
 </ion-content>
+

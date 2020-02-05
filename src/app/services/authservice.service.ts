@@ -2,7 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-export interface Client {
+import { AngularFireAuth } from '@angular/fire/auth';
+export interface Users{
 
  
   id?: string;
@@ -21,33 +22,45 @@ export interface Client {
 })
 export class AuthserviceService implements OnInit {
 
-  private clientsCollection: AngularFirestoreCollection<Client>;
-  private clients: Observable<Client[]>;
-  constructor(private db: AngularFirestore) {
-  this.clientsCollection = this.db.collection<Client> ('clients' );
+  private clientsCollection: AngularFirestoreCollection<Users>;
+  private clients: Observable<Users[]>;
+  authState: string;
+  constructor(private db: AngularFirestore,
+               public fAuth: AngularFireAuth,
+    ) {
+   this.getCurrenUser()
+
+  this.clientsCollection = this.db.collection<Users> ('users' );
   
   this.clients = this.clientsCollection.snapshotChanges().pipe(
     map(actions => {
       return actions.map(a => {
-        const data = a.payload.doc.data()as Client;
+        const data = a.payload.doc.data()as Users;
         const id = a.payload.doc.id;
         return {id, ...data};
       });
     })
   );
  }
+ getCurrenUser(){
+  this.fAuth.authState.subscribe((auth) => {
+    this.authState = auth.uid
+    localStorage.setItem('user', JSON.stringify(this.authState));
+    console.log(JSON.parse(localStorage.getItem('user')))
 
+   console.log(this.authState)
+  });
+}
 getClients() {
   return this.clients;
 }
-
 getClient(id) {
-  return this.clientsCollection.doc<Client>(id).valueChanges();
+  return this.clientsCollection.doc<Users>(id).valueChanges();
 }
-updateClient(client: Client, id: string) {
+updateClient(client: Users, id: string) {
  return this.clientsCollection.doc(id).update(client);
 }
-addClient(client: Client) {
+addClient(client: Users) {
   return this.clientsCollection.add(client);
 }
 removeClient(id) {

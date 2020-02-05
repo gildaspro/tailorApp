@@ -55,7 +55,7 @@ export class ClientsPage implements OnInit  {
 ngOnInit() {
    this.clientId = this.route.snapshot.paramMap.get('id');
    if (this.clientId) {
-      this.storeService.getClient(this.clientId).subscribe(res => {
+      this.storeService.getsingleClient(this.clientId).subscribe(res => {
         this.client = res;
       });
     }

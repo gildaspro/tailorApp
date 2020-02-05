@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ToastController, NavController, NavParams, LoadingController } from '@ionic/angular';
+import { ToastController, NavController, NavParams, LoadingController, Platform, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RequetServiceService, Order } from 'src/app/services/requet-service.service';
-import { Client, StoreServiceService } from 'src/app/services/store-service.service';
+import {  Client,AppenClientService } from 'src/app/services/appen-client.service';
+import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-edit-order',
@@ -37,8 +38,27 @@ export class EditOrderPage implements OnInit {
                private route: ActivatedRoute,
                private orderService: RequetServiceService,
                public loadingController: LoadingController,
-               private storeService: StoreServiceService,
+               private storeService: AppenClientService,
+               private plt: Platform,
+               private Notification: LocalNotifications,
+               public alertController: AlertController
                ) {
+                   
+                //  this.plt.ready().then(() =>{
+                //     this.Notification.on('click').subscribe(res =>{
+                //       let msg = res.data ? res.data.mydata:'' ;
+                //       console.log('click', res)
+                //      this.showAlert(res.title,res.text,msg)
+                //     })
+                //     this.Notification.on('trigger').subscribe(res =>{
+                //      let msg = res.data ? res.data.mydata:'' ;
+                //      console.log('trigger', res)
+                //      this.showAlert(res.title,res.text,msg)
+                //     })
+                //  })
+
+
+                this. NotificationShedule()
 
                 }
                clientId = this.orders.id;
@@ -56,8 +76,31 @@ export class EditOrderPage implements OnInit {
                   }
                   this.loadItem();
            }
+          
+         NotificationShedule(){
+           this.Notification.schedule({
+            id: 1,
+            title: 'My first notification junior',
+            text: 'Thats pretty easy...',
+            data: { mydata:'first local notification hope it give '},
+            trigger: { in: 5 , unit: ELocalNotificationTriggerUnit.SECOND},
+            foreground: true
 
+           })
+         }
+         
+        
 
+            showAlert( title , text ,data){
+              this.alertController.create({
+                header: title,
+                subHeader: text,
+                message: data,
+                buttons: ['OK']
+              }).then( alert => alert.present())
+
+            }
+            
 
              addOrder() {
               this.loadingController.create({
@@ -68,9 +111,10 @@ export class EditOrderPage implements OnInit {
               })  
             
                 this.orderService.addClient(this.orders).then(() => {
-                this.rootNavCtrl.navigateForward('/tabs/order');
                 this.showTaost('New order Added');
                 this.loaderToShow.dismiss();
+                this.rootNavCtrl.navigateForward('/tabs/order');
+           
 
               }, err => {
                  this.showTaost('There was a problem adding your CLient :(');
@@ -89,15 +133,14 @@ export class EditOrderPage implements OnInit {
               })  
             
                this.orderService.updateClient(this.orders , this.clientId).then(() => {
+               this.showTaost('New Client update');
+               this.loaderToShow.dismiss();
+
                this.rootNavCtrl.navigateForward('/tabs/order');
-
-                this.showTaost('New Client update');
-
-               }, err => {
+              }, err => {
                  this.showTaost('There was a problem updating your CLient :(');
 
                });
-               this.loaderToShow.dismiss();
 
              }
              remove() {
@@ -109,6 +152,7 @@ export class EditOrderPage implements OnInit {
               })  
             
               this.orderService.removeClient(this.clientId).then(() => {
+                this.loaderToShow.dismiss();
                 this.rootNavCtrl.navigateForward('/tabs/order');
                 this.showTaost('Oder deleted succesfully');
 
@@ -116,7 +160,6 @@ export class EditOrderPage implements OnInit {
                  this.showTaost('There was a problem updating your CLient :(');
 
                });
-               this.loaderToShow.dismiss();
 
            }
              showTaost(msg) {
@@ -129,8 +172,7 @@ export class EditOrderPage implements OnInit {
              loadItem() {
                this.storeService.getClients().subscribe(res => {
                 this.clientList = res ;
-            
-             });
+            });
             
              }
         

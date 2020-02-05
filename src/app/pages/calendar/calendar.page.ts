@@ -40,44 +40,41 @@ export class CalendarPage implements OnInit {
     this.event = {
       title: '',
       desc: '',
-      startTime: new Date().toISOString(),
-      endTime: new Date().toISOString(),
+      startTime: Date.parse("2019-01-01T00:00:00.000+00:00"),
+      endTime: Date.parse("2019-01-01T00:00:00.000+00:00"),
       allDay: false
     };
   }
-
-  // Create the right event format and reload source
-  addEvent() {
-    const eventCopy:Calender = {
-      title: this.event.title,
-      startTime:  new Date(this.event.startTime),
-      endTime: new Date(this.event.endTime),
-      allDay: this.event.allDay,
-      desc: this.event.desc
-    };
-     this.calenderService.addEvent(eventCopy).then( value => {
-        console.log(value)
-    }, err => {
-         console.log(err)
-     });
-
-    if (eventCopy.allDay) {
-      const start = eventCopy.startTime;
-      const end = eventCopy.endTime;
-
-      eventCopy.startTime = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()));
-      eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
-    }
- 
-    this.eventSource.push(eventCopy);
-    this.myCal.loadEvents();
-    this.resetEvent();
+ // Create the right event format and reload source
+ addEvent() {
+  let eventCopy = {
+    title: this.event.title,
+    startTime:  new Date(this.event.startTime),
+    endTime: new Date(this.event.endTime),
+    allDay: this.event.allDay,
+    desc: this.event.desc
   }
+
+  if (eventCopy.allDay) {
+    let start = eventCopy.startTime;
+    let end = eventCopy.endTime;
+
+    eventCopy.startTime = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()));
+    eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
+  }
+
+  this.eventSource.push(eventCopy);
+  this.myCal.loadEvents();
+  this.resetEvent();
+}
+
+
    // Change current month/week/day
  next() {
   var swiper = document.querySelector('.swiper-container')['swiper'];
   swiper.slideNext();
 }
+
 
 back() {
   var swiper = document.querySelector('.swiper-container')['swiper'];

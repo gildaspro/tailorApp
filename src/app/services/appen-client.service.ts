@@ -1,10 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { FormBuilder, Validators, FormGroup} from '@angular/forms';
-import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 export interface Client {
 
@@ -30,24 +27,20 @@ export interface Client {
 
 
 }
+
 @Injectable({
   providedIn: 'root'
 })
-export class StoreServiceService implements OnInit {
+export class AppenClientService {
 
   private clientsCollection: AngularFirestoreCollection<Client>;
-  private clientsDocumentCollection: AngularFirestoreCollection<Client>
   private clients: Observable<Client[]>;
-  id = this.db.createId();
-  uid
-  constructor(private db: AngularFirestore,
-              public fAuth: AngularFireAuth) {
-    this.uid = JSON.parse(localStorage.getItem('user'));
-    this.clientsCollection = this.db.collection("userdata").doc(this.uid).collection<Client>("clients");
-    this.clientsDocumentCollection = this.db.collection("clients");
-
-    //  this.clientsCollection = this.db.collection<Client>("clients" );
-   this.clients = this.clientsCollection.snapshotChanges().pipe(
+  uid: any;
+  constructor(private db: AngularFirestore) {
+  this.uid = JSON.parse(localStorage.getItem('user'));
+  this.clientsCollection = this.db.collection("userdata").doc(this.uid).collection<Client> ('clients' );
+  
+  this.clients = this.clientsCollection.snapshotChanges().pipe(
     map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data()as Client;
@@ -71,13 +64,9 @@ updateClient(client: Client, id: string) {
 addClient(client: Client) {
   return this.clientsCollection.add(client);
 }
-removeClient(id: string) {
+removeClient(id) {
   return this.clientsCollection.doc(id).delete();
 }
- ngOnInit() {
-}
-
-
-
-
+   
+    
 }
